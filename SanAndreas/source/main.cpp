@@ -2,10 +2,11 @@
 #include <tesla.hpp>    // The Tesla Header
 #include <dmntcht.h>
 #include "CHEAT/DEFINITIONS/constants.h"
-#include "CHEAT/DEFINITIONS/addresses.h"
 #include "CHEAT/DEFINITIONS/noval.h"
+#include "CHEAT/DEFINITIONS/addresses.h"
 #include "CHEAT/cheatFunctions.h"
-//DmntCheatProcessMetadata metadata;
+#include "CHEAT/CHEAT/PLAYERCHEAT.h"
+#include "CHEAT/CHEAT/TIMECHEAT.h"
 
 #define GAME_TITLE_ID 0x0000000000000000
 static bool initialized=false;
@@ -29,6 +30,80 @@ bool debugService_isRunning(){
     return isRunning;
 }
 
+class PLAYER_CHEAT_GUI : public tsl::Gui {
+public:
+    PLAYER_CHEAT_GUI() {}
+
+    virtual tsl::elm::Element* createUI() override {
+        auto *rootFrame = new tsl::elm::OverlayFrame("Player Cheats", "Ay SIS JEJ");
+		auto list = new tsl::elm::List();
+		if (initialized&&debugService_isRunning()&&metadata.title_id==GAME_TITLE_ID&&bid_match())
+		{
+			auto *Add250k = new tsl::elm::ListItem("Add $250,000", "\uE0A0");
+			Add250k2(Add250k);
+			
+			auto *RemoveCash = new tsl::elm::ListItem("Remove All Money", "\uE0A0");
+			RemoveCash2(RemoveCash);
+			
+			auto *MaxHealth = new tsl::elm::ListItem("Max Health", "\uE0A0");
+			MaxHealth2(MaxHealth);
+			
+			auto *MaxArmor = new tsl::elm::ListItem("Max Armor", "\uE0A0");
+			MaxArmor2(MaxArmor);
+			
+			auto *Suicide = new tsl::elm::ListItem("Kill CJ", "\uE0A0");
+			Suicide2(Suicide);
+			
+			auto *MaxAmmo = new tsl::elm::ListItem("Max Ammunition", "\uE0A0");
+			MaxAmmo2(MaxAmmo);
+			
+			list->addItem(new tsl::elm::CategoryHeader("Money Cheats"));
+			list->addItem(Add250k);
+			list->addItem(RemoveCash);
+			list->addItem(new tsl::elm::CategoryHeader("Health/Armor/Ammo"));
+			list->addItem(MaxHealth);
+			list->addItem(MaxArmor);
+			list->addItem(Suicide);
+			list->addItem(MaxAmmo);
+			list->addItem(new tsl::elm::CategoryHeader("Stats"));
+			
+		}
+	
+		rootFrame->setContent(list);
+        return rootFrame;
+    }
+};
+
+class TIME_CHEAT_GUI : public tsl::Gui {
+public:
+    TIME_CHEAT_GUI() {}
+
+    virtual tsl::elm::Element* createUI() override {
+        auto *rootFrame = new tsl::elm::OverlayFrame("Time Cheats", "Back to the future!");
+		auto list = new tsl::elm::List();
+		if (initialized&&debugService_isRunning()&&metadata.title_id==GAME_TITLE_ID&&bid_match())
+		{
+			auto *TimeEditHour = new tsl::elm::ListItem("Hour", "\uE07B / \uE07C");
+			TimeEditHour2(TimeEditHour);
+			
+			auto *TimeEditMin = new tsl::elm::ListItem("Minute", "\uE07B / \uE07C");
+			TimeEditMin2(TimeEditMin);
+			
+			auto *TimeFreeze = new tsl::elm::ListItem("Freeze Daily Timer", "\uE07B / \uE07C");
+			TimeFreeze2(TimeFreeze);
+			
+			list->addItem(new tsl::elm::CategoryHeader("\uE07B - Decrement  /  \uE07C - Increment"));
+			list->addItem(TimeEditHour);
+			list->addItem(TimeEditMin);
+			list->addItem(new tsl::elm::CategoryHeader("\uE07B - OFF  /  \uE07C - ON"));
+			list->addItem(TimeFreeze);
+		}
+	
+		rootFrame->setContent(list);
+        return rootFrame;
+    }
+};
+
 class LEGALGUI : public tsl::Gui {
 public:
     LEGALGUI() {}
@@ -38,7 +113,7 @@ public:
 		auto list = new tsl::elm::List();
 		if (initialized&&debugService_isRunning()&&metadata.title_id==GAME_TITLE_ID&&bid_match())
 		{
-			list->addItem(new tsl::elm::CategoryHeader("THIS SOFTWARE MUST NOT BE SOLD NEITHER \nALONE NOR AS PART OF A BUNDLE. \n\nIF YOU PAID FOR THIS SOFTWARE, YOU HAVE \nBEEN SCAMMED AND SHOULD DEMAND YOUR \nMONEY BACK IMMEDIATELY.  \n\n\nThis software provides users with \nspecial cheats for one or more games in \nthe Grand Theft Auto Trilogy. \nThese cheats were made through \nthe use of cleanroom reverse engineering \ntherefore, no copyright law has been broken. \n\nIn other words, this is a passion project \nplease don't sue me."));
+			list->addItem(new tsl::elm::CategoryHeader("THIS SOFTWARE MUST NOT BE SOLD NEITHER \nALONE NOR AS PART OF A BUNDLE. \n\nIF YOU PAID FOR THIS SOFTWARE, YOU HAVE \nBEEN SCAMMED AND SHOULD DEMAND YOUR \nMONEY BACK IMMEDIATELY. \n\nThis software is not affiliated with, endorsed or \napproved by Nintendo, Rockstar Games or \nTakeTwo Interactive. \n\nThis software provides users with \nspecial cheats for one or more games in \nthe Grand Theft Auto Trilogy. \nThese cheats were made through \nthe use of cleanroom reverse engineering \ntherefore, no copyright law has been broken. \n\nIn other words, this is a passion project \nplease don't sue me."));
 		}
 	
 		rootFrame->setContent(list);
@@ -58,7 +133,7 @@ public:
 			auto *PlayerCheats = new tsl::elm::ListItem("Player Cheats", "\u2600");
 			PlayerCheats->setClickListener([](u64 keys) { 
             if (keys & KEY_A) {
-                
+                tsl::changeTo<PLAYER_CHEAT_GUI>();
                 return true;
             }
 
@@ -68,42 +143,22 @@ public:
 			auto *TimeCheats = new tsl::elm::ListItem("Time Cheats", "\u2600");
 			TimeCheats->setClickListener([](u64 keys) { 
             if (keys & KEY_A) {
-                
+                tsl::changeTo<TIME_CHEAT_GUI>();
                 return true;
             }
 
             return false;
 			});
 			
-			auto *ShaderCheats = new tsl::elm::ListItem("Shader Cheats", "\u2600");
+			/*auto *ShaderCheats = new tsl::elm::ListItem("Shader Cheats", "\u2600");
 			ShaderCheats->setClickListener([](u64 keys) { 
             if (keys & KEY_A) {
-                
+                tsl::changeTo<SHADER_CHEAT_GUI>();
                 return true;
             }
 
             return false;
-			});
-			
-			auto *PhysicsCheats = new tsl::elm::ListItem("Physics Cheats", "\u2600");
-			PhysicsCheats->setClickListener([](u64 keys) { 
-            if (keys & KEY_A) {
-                
-                return true;
-            }
-
-            return false;
-			});
-			
-			auto *MiscCheats = new tsl::elm::ListItem("Misc Cheats", "\u2600");
-			MiscCheats->setClickListener([](u64 keys) { 
-            if (keys & KEY_A) {
-                
-                return true;
-            }
-
-            return false;
-			});
+			});*/
 			
 			auto *LEGALINFORMATION = new tsl::elm::ListItem("Legal Information", "\u2600");
 			LEGALINFORMATION->setClickListener([](u64 keys) { 
@@ -118,9 +173,7 @@ public:
 			list->addItem(new tsl::elm::CategoryHeader("Cheats"));
 			list->addItem(PlayerCheats);
 			list->addItem(TimeCheats);
-			list->addItem(ShaderCheats);
-			list->addItem(PhysicsCheats);
-			list->addItem(MiscCheats);
+			/*list->addItem(ShaderCheats);*/
 			list->addItem(new tsl::elm::CategoryHeader("Legal"));
 			list->addItem(LEGALINFORMATION);
 		}
