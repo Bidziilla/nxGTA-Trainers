@@ -1,5 +1,4 @@
 #include "cheatFunctions.h"
-//#include "CHEAT/DEFINITIONS/noval.h"
 
 DmntCheatProcessMetadata metadata;
 int Read32;
