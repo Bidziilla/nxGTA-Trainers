@@ -56,3 +56,40 @@ u32 util::SubFromOffset(u8 region, u32 Address, u32 Input)
 	}
 	return true;
 }
+
+/*
+
+u32 util::EditTime(u8 Operation, u32 Address, u32 Input, u8 compare, u8 resetValue)
+{
+    dmntchtGetCheatProcessMetadata(&metadata);
+	
+	dmntchtReadCheatProcessMemory(metadata.main_nso_extents.base + Address, &Read32, sizeof(1));
+	
+	if (Operation == 0x00)
+	{
+		if (Read32 >= compare)
+		{
+			dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + Address, &resetValue, sizeof(1));
+		}
+		else
+		{
+			dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + Address, &Read32, sizeof(1));
+			MathOutput = Read32 + Input;
+			dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + Address, &MathOutput, sizeof(1));
+		}
+	}
+	else if (Operation == 0x01)
+	{
+		if (Read32 <= compare)
+		{
+			dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + Address, &resetValue, sizeof(1));
+		}
+		else
+		{
+			dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + Address, &Read32, sizeof(1));
+			MathOutput = Read32 - Input;
+			dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + Address, &MathOutput, sizeof(1));
+		}
+	}
+	return true;
+}*/
