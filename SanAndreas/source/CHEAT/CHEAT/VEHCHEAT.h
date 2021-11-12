@@ -98,4 +98,148 @@ bool SpawnCar052(T *entry)
   return true;
 }
 
+template <typename T>
+bool SpawnCar062(T *entry) 
+{
+  entry->setClickListener([](u64 keys) 
+  { 
+    if (keys & KEY_A) 
+	{
+		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &Rustler, sizeof(4));
+		return true;
+	}
+
+    return false;
+  });
+  return true;
+}
+
+template <typename T>
+bool SpawnCar072(T *entry) 
+{
+  entry->setClickListener([](u64 keys) 
+  { 
+    if (keys & KEY_A) 
+	{
+		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &Beagle, sizeof(4));
+		return true;
+	}
+
+    return false;
+  });
+  return true;
+}
+
+template <typename T>
+bool SpawnCar082(T *entry) 
+{
+  entry->setClickListener([](u64 keys) 
+  { 
+    if (keys & KEY_A) 
+	{
+		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &Nevada, sizeof(4));
+		return true;
+	}
+
+    return false;
+  });
+  return true;
+}
+
+template <typename T>
+bool SpawnCar092(T *entry) 
+{
+  entry->setClickListener([](u64 keys) 
+  { 
+    if (keys & KEY_A) 
+	{
+		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &Cheetah, sizeof(4));
+		return true;
+	}
+
+    return false;
+  });
+  return true;
+}
+
+template <typename T>
+bool SpawnCar0A2(T *entry) 
+{
+  entry->setClickListener([](u64 keys) 
+  { 
+    if (keys & KEY_A) 
+	{
+		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &Dune, sizeof(4));
+		return true;
+	}
+
+    return false;
+  });
+  return true;
+}
+
+template <typename T>
+bool SpawnCar0B2(T *entry) 
+{
+  entry->setClickListener([](u64 keys) 
+  { 
+    if (keys & KEY_A) 
+	{
+		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &NRG_500, sizeof(4));
+		return true;
+	}
+
+    return false;
+  });
+  return true;
+}
+
+template <typename T>
+bool SpawnCar0C2(T *entry) 
+{
+  entry->setClickListener([](u64 keys) 
+  { 
+    if (keys & KEY_A) 
+	{
+		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &TowTruck, sizeof(4));
+		return true;
+	}
+
+    return false;
+  });
+  return true;
+}
+
+template <typename T>
+bool SpawnCar0D2(T *entry) 
+{
+  entry->setClickListener([](u64 keys) 
+  { 
+    if (keys & KEY_A) 
+	{
+		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &Maverick, sizeof(4));
+		return true;
+	}
+
+    return false;
+  });
+  return true;
+}
+
+template <typename T>
+bool SpawnCar0E2(T *entry) 
+{
+  entry->setClickListener([](u64 keys) 
+  { 
+    if (keys & KEY_A) 
+	{
+		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &Jetmax, sizeof(4));
+		return true;
+	}
+
+    return false;
+  });
+  return true;
+}
+
 #endif // VEHCHEAT_H
