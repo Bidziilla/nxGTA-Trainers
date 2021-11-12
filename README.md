@@ -8,6 +8,7 @@ in the other, please let me know!!*
 * Adjusting Shaders
 * Adjusting Physics
 * Infinite Health
+* Spawning Special Cars
 * and much more!
 
 *The list of cheats yet to come may change, right now everything is just in it's planning phase. No code is guaranteed to be made.*
