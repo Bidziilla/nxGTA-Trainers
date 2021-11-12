@@ -4,17 +4,21 @@
 #include "CHEAT/DEFINITIONS/constants.h"
 #include "CHEAT/DEFINITIONS/noval.h"
 #include "CHEAT/DEFINITIONS/addresses.h"
+#include "CHEAT/DEFINITIONS/VEHICLES.h"
 #include "CHEAT/cheatFunctions.h"
 #include "CHEAT/CHEAT/PLAYERCHEAT.h"
 #include "CHEAT/CHEAT/TIMECHEAT.h"
+#include "CHEAT/CHEAT/PHYSICCHEAT.h"
+#include "CHEAT/CHEAT/VEHCHEAT.h"
+#include "CHEAT/CHEAT/MISCCHEAT.h"
 
-#define GAME_TITLE_ID 0x0000000000000000
+#define GAME_TITLE_ID 0x010065a014024000
 static bool initialized=false;
 
 //CHECK
 bool bid_match() {
     const unsigned char build_id_size=8;
-    const unsigned char expected_build_id[build_id_size]={0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    const unsigned char expected_build_id[build_id_size]={0x70, 0x61, 0x70, 0x6e, 0xf4, 0xd9, 0x7b, 0x84};
     for(unsigned char i=0; i<build_id_size; i++)
         if(metadata.main_nso_build_id[i]!=expected_build_id[i])
             return false;
@@ -39,7 +43,7 @@ public:
 		auto list = new tsl::elm::List();
 		if (initialized&&debugService_isRunning()&&metadata.title_id==GAME_TITLE_ID&&bid_match())
 		{
-			auto *Add250k = new tsl::elm::ListItem("Add $250,000", "\uE0A0");
+			auto *Add250k = new tsl::elm::ListItem("Add $25,000", "\uE0A0");
 			Add250k2(Add250k);
 			
 			auto *RemoveCash = new tsl::elm::ListItem("Remove All Money", "\uE0A0");
@@ -57,15 +61,19 @@ public:
 			auto *MaxAmmo = new tsl::elm::ListItem("Max Ammunition", "\uE0A0");
 			MaxAmmo2(MaxAmmo);
 			
+			auto *MuscleEdit = new tsl::elm::ListItem("Muscle", "\uE07B / \uE07C");
+			MuscleEdit2(MuscleEdit);
+			
 			list->addItem(new tsl::elm::CategoryHeader("Money Cheats"));
 			list->addItem(Add250k);
 			list->addItem(RemoveCash);
-			list->addItem(new tsl::elm::CategoryHeader("Health/Armor/Ammo"));
-			list->addItem(MaxHealth);
-			list->addItem(MaxArmor);
-			list->addItem(Suicide);
-			list->addItem(MaxAmmo);
+			//list->addItem(new tsl::elm::CategoryHeader("Health/Armor/Ammo"));
+			//list->addItem(MaxHealth);
+			//list->addItem(MaxArmor);
+			//list->addItem(Suicide);
+			//list->addItem(MaxAmmo);
 			list->addItem(new tsl::elm::CategoryHeader("Stats"));
+			list->addItem(MuscleEdit);
 			
 		}
 	
@@ -89,14 +97,92 @@ public:
 			auto *TimeEditMin = new tsl::elm::ListItem("Minute", "\uE07B / \uE07C");
 			TimeEditMin2(TimeEditMin);
 			
-			auto *TimeFreeze = new tsl::elm::ListItem("Freeze Daily Timer", "\uE07B / \uE07C");
-			TimeFreeze2(TimeFreeze);
-			
 			list->addItem(new tsl::elm::CategoryHeader("\uE07B - Decrement  /  \uE07C - Increment"));
 			list->addItem(TimeEditHour);
 			list->addItem(TimeEditMin);
+		}
+	
+		rootFrame->setContent(list);
+        return rootFrame;
+    }
+};
+
+class PHYSIC_CHEAT_GUI : public tsl::Gui {
+public:
+    PHYSIC_CHEAT_GUI() {}
+
+    virtual tsl::elm::Element* createUI() override {
+        auto *rootFrame = new tsl::elm::OverlayFrame("Physics Cheats", "Fuck science!");
+		auto list = new tsl::elm::List();
+		if (initialized&&debugService_isRunning()&&metadata.title_id==GAME_TITLE_ID&&bid_match())
+		{
+			auto *RunFast = new tsl::elm::ListItem("Super Run", "\uE07B / \uE07C");
+			RunFast2(RunFast);
+			
 			list->addItem(new tsl::elm::CategoryHeader("\uE07B - OFF  /  \uE07C - ON"));
-			list->addItem(TimeFreeze);
+			list->addItem(RunFast);
+		}
+	
+		rootFrame->setContent(list);
+        return rootFrame;
+    }
+};
+
+class VEH_CHEAT_GUI : public tsl::Gui {
+public:
+    VEH_CHEAT_GUI() {}
+
+    virtual tsl::elm::Element* createUI() override {
+        auto *rootFrame = new tsl::elm::OverlayFrame("Vehicle Cheats", "Use Spawn Trashmasher Code");
+		auto list = new tsl::elm::List();
+		if (initialized&&debugService_isRunning()&&metadata.title_id==GAME_TITLE_ID&&bid_match())
+		{
+			auto *SpawnCar00 = new tsl::elm::ListItem("Trash Master", "\uE0A0");
+			SpawnCar002(SpawnCar00);
+			
+			auto *SpawnCar01 = new tsl::elm::ListItem("Stretch", "\uE0A0");
+			SpawnCar012(SpawnCar01);
+			
+			auto *SpawnCar02 = new tsl::elm::ListItem("FBI Truck", "\uE0A0");
+			SpawnCar022(SpawnCar02);
+			
+			auto *SpawnCar03 = new tsl::elm::ListItem("Combine Harvester", "\uE0A0");
+			SpawnCar032(SpawnCar03);
+			
+			auto *SpawnCar04 = new tsl::elm::ListItem("Andromada", "\uE0A0");
+			SpawnCar042(SpawnCar04);
+			
+			auto *SpawnCar05 = new tsl::elm::ListItem("RC CAM", "\uE0A0");
+			SpawnCar052(SpawnCar05);
+			
+			list->addItem(new tsl::elm::CategoryHeader("A, R, A, R, \uE07B, \uE07B, R, L, A, \uE07C"));
+			list->addItem(SpawnCar00);
+			list->addItem(SpawnCar01);
+			list->addItem(SpawnCar02);
+			list->addItem(SpawnCar03);
+			list->addItem(SpawnCar04);
+			list->addItem(SpawnCar05);
+		}
+	
+		rootFrame->setContent(list);
+        return rootFrame;
+    }
+};
+
+class MISC_CHEAT_GUI : public tsl::Gui {
+public:
+    MISC_CHEAT_GUI() {}
+
+    virtual tsl::elm::Element* createUI() override {
+        auto *rootFrame = new tsl::elm::OverlayFrame("Misc Cheats", "Some extra stuff...");
+		auto list = new tsl::elm::List();
+		if (initialized&&debugService_isRunning()&&metadata.title_id==GAME_TITLE_ID&&bid_match())
+		{
+			auto *FixAudioo = new tsl::elm::ListItem("Increase Audio Volume", "\uE07B / \uE07C");
+			FixAudioo2(FixAudioo);
+			
+			list->addItem(new tsl::elm::CategoryHeader("\uE07B - OFF  /  \uE07C - ON"));
+			list->addItem(FixAudioo);
 		}
 	
 		rootFrame->setContent(list);
@@ -150,15 +236,35 @@ public:
             return false;
 			});
 			
-			/*auto *ShaderCheats = new tsl::elm::ListItem("Shader Cheats", "\u2600");
-			ShaderCheats->setClickListener([](u64 keys) { 
+			auto *PhysicCheats = new tsl::elm::ListItem("Physics Cheats", "\u2600");
+			PhysicCheats->setClickListener([](u64 keys) { 
             if (keys & KEY_A) {
-                tsl::changeTo<SHADER_CHEAT_GUI>();
+                tsl::changeTo<PHYSIC_CHEAT_GUI>();
                 return true;
             }
 
             return false;
-			});*/
+			});
+			
+			auto *VehicleCheats = new tsl::elm::ListItem("Vehicle Cheats", "\u2600");
+			VehicleCheats->setClickListener([](u64 keys) { 
+            if (keys & KEY_A) {
+                tsl::changeTo<VEH_CHEAT_GUI>();
+                return true;
+            }
+
+            return false;
+			});
+			
+			auto *MiscCheats = new tsl::elm::ListItem("Misc Cheats", "\u2600");
+			MiscCheats->setClickListener([](u64 keys) { 
+            if (keys & KEY_A) {
+                tsl::changeTo<MISC_CHEAT_GUI>();
+                return true;
+            }
+
+            return false;
+			});
 			
 			auto *LEGALINFORMATION = new tsl::elm::ListItem("Legal Information", "\u2600");
 			LEGALINFORMATION->setClickListener([](u64 keys) { 
@@ -173,14 +279,16 @@ public:
 			list->addItem(new tsl::elm::CategoryHeader("Cheats"));
 			list->addItem(PlayerCheats);
 			list->addItem(TimeCheats);
-			/*list->addItem(ShaderCheats);*/
+			list->addItem(PhysicCheats);
+			list->addItem(VehicleCheats);
+			list->addItem(MiscCheats);
 			list->addItem(new tsl::elm::CategoryHeader("Legal"));
 			list->addItem(LEGALINFORMATION);
 		}
-		/*else
+		else
         {
 			list->addItem(new tsl::elm::CategoryHeader("All you had to do was load the right game, CJ! \nERROR: TitleID Mismatch"));
-        }*/
+        }
 
         rootFrame->setContent(list);
         return rootFrame;
