@@ -49,7 +49,7 @@ public:
 			auto *RemoveCash = new tsl::elm::ListItem("Remove All Money", "\uE0A0");
 			RemoveCash2(RemoveCash);
 			
-			auto *MaxHealth = new tsl::elm::ListItem("Max Health", "\uE0A0");
+			/*auto *MaxHealth = new tsl::elm::ListItem("Max Health", "\uE0A0");
 			MaxHealth2(MaxHealth);
 			
 			auto *MaxArmor = new tsl::elm::ListItem("Max Armor", "\uE0A0");
@@ -59,10 +59,25 @@ public:
 			Suicide2(Suicide);
 			
 			auto *MaxAmmo = new tsl::elm::ListItem("Max Ammunition", "\uE0A0");
-			MaxAmmo2(MaxAmmo);
+			MaxAmmo2(MaxAmmo);*/
 			
 			auto *MuscleEdit = new tsl::elm::ListItem("Muscle", "\uE07B / \uE07C");
 			MuscleEdit2(MuscleEdit);
+			
+			auto *FatEdit = new tsl::elm::ListItem("Fat", "\uE07B / \uE07C");
+			FatEdit2(FatEdit);
+			
+			auto *StaminaEdit = new tsl::elm::ListItem("Stamina", "\uE07B / \uE07C");
+			StaminaEdit2(StaminaEdit);
+			
+			auto *RespectEdit = new tsl::elm::ListItem("Respect", "\uE07B / \uE07C");
+			RespectEdit2(RespectEdit);
+			
+			auto *SexAppealEdit = new tsl::elm::ListItem("Sex Appeal", "\uE07B / \uE07C");
+			SexAppealEdit2(SexAppealEdit);
+			
+			auto *MaxHealthEdit = new tsl::elm::ListItem("Max Health", "\uE07B / \uE07C");
+			MaxHealthEdit2(MaxHealthEdit);
 			
 			list->addItem(new tsl::elm::CategoryHeader("Money Cheats"));
 			list->addItem(Add250k);
@@ -74,6 +89,11 @@ public:
 			//list->addItem(MaxAmmo);
 			list->addItem(new tsl::elm::CategoryHeader("Stats"));
 			list->addItem(MuscleEdit);
+			list->addItem(FatEdit);
+			list->addItem(StaminaEdit);
+			list->addItem(RespectEdit);
+			list->addItem(SexAppealEdit);
+			list->addItem(MaxHealthEdit);
 			
 		}
 	
@@ -155,6 +175,33 @@ public:
 			auto *SpawnCar05 = new tsl::elm::ListItem("RC CAM", "\uE0A0");
 			SpawnCar052(SpawnCar05);
 			
+			auto *SpawnCar06 = new tsl::elm::ListItem("Rustler", "\uE0A0");
+			SpawnCar062(SpawnCar06);
+			
+			auto *SpawnCar07 = new tsl::elm::ListItem("Beagle", "\uE0A0");
+			SpawnCar072(SpawnCar07);
+			
+			auto *SpawnCar08 = new tsl::elm::ListItem("Nevada", "\uE0A0");
+			SpawnCar082(SpawnCar08);
+			
+			auto *SpawnCar09 = new tsl::elm::ListItem("Cheetah", "\uE0A0");
+			SpawnCar092(SpawnCar09);
+			
+			auto *SpawnCar0A = new tsl::elm::ListItem("Dune", "\uE0A0");
+			SpawnCar0A2(SpawnCar0A);
+			
+			auto *SpawnCar0B = new tsl::elm::ListItem("NRG-500", "\uE0A0");
+			SpawnCar0B2(SpawnCar0B);
+			
+			auto *SpawnCar0C = new tsl::elm::ListItem("Tow Truck", "\uE0A0");
+			SpawnCar0C2(SpawnCar0C);
+			
+			auto *SpawnCar0D = new tsl::elm::ListItem("Maverick", "\uE0A0");
+			SpawnCar0D2(SpawnCar0D);
+			
+			auto *SpawnCar0E = new tsl::elm::ListItem("Jetmax", "\uE0A0");
+			SpawnCar0E2(SpawnCar0E);
+			
 			list->addItem(new tsl::elm::CategoryHeader("A, R, A, R, \uE07B, \uE07B, R, L, A, \uE07C"));
 			list->addItem(SpawnCar00);
 			list->addItem(SpawnCar01);
@@ -162,6 +209,17 @@ public:
 			list->addItem(SpawnCar03);
 			list->addItem(SpawnCar04);
 			list->addItem(SpawnCar05);
+			list->addItem(SpawnCar06);
+			list->addItem(SpawnCar07);
+			list->addItem(SpawnCar08);
+			list->addItem(SpawnCar09);
+			list->addItem(SpawnCar0A);
+			list->addItem(SpawnCar0B);
+			list->addItem(SpawnCar0C);
+			list->addItem(SpawnCar0D);
+			list->addItem(SpawnCar0E);
+			//list->addItem(SpawnCar0F);
+			
 		}
 	
 		rootFrame->setContent(list);
