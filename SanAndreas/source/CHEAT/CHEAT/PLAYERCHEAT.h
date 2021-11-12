@@ -35,7 +35,7 @@ bool RemoveCash2(T *entry)
   return true;
 }
 
-template <typename T>
+/*template <typename T>
 bool MaxHealth2(T *entry) 
 {
   entry->setClickListener([](u64 keys) 
@@ -74,8 +74,8 @@ bool Suicide2(T *entry)
   { 
     if (keys & KEY_A) 
 	{
-		/*dmntchtWriteCheatProcessMemory(metadata.heap_extents.base + ADDR_CJHEALTH, &PlaceHolder, sizeof(4));
-		dmntchtWriteCheatProcessMemory(metadata.heap_extents.base + ADDR_CJARMOR, &PlaceHolder, sizeof(4));*/
+		dmntchtWriteCheatProcessMemory(metadata.heap_extents.base + ADDR_CJHEALTH, &PlaceHolder, sizeof(4));
+		dmntchtWriteCheatProcessMemory(metadata.heap_extents.base + ADDR_CJARMOR, &PlaceHolder, sizeof(4));
 		return true;
     }
 
@@ -98,7 +98,7 @@ bool MaxAmmo2(T *entry)
     return false;
   });
   return true;
-}
+}*/
 
 template <typename T>
 bool MuscleEdit2(T *entry) 
@@ -113,6 +113,111 @@ bool MuscleEdit2(T *entry)
 	else if (keys & KEY_DLEFT) 
 	{
 		util::SubFromOffset(0, ADDR_CJMUSCLE, 0x250000);
+		return true;		
+    }
+
+    return false;
+  });
+  return true;
+}
+
+template <typename T>
+bool FatEdit2(T *entry) 
+{
+  entry->setClickListener([](u64 keys) 
+  { 
+    if (keys & KEY_DRIGHT)  
+	{
+		util::AddToOffset(0, ADDR_CJFAT, 0x250000);
+		return true;
+    }
+	else if (keys & KEY_DLEFT) 
+	{
+		util::SubFromOffset(0, ADDR_CJFAT, 0x250000);
+		return true;		
+    }
+
+    return false;
+  });
+  return true;
+}
+
+template <typename T>
+bool StaminaEdit2(T *entry) 
+{
+  entry->setClickListener([](u64 keys) 
+  { 
+    if (keys & KEY_DRIGHT)  
+	{
+		util::AddToOffset(0, ADDR_CJSTAMINA, 0x250000);
+		return true;
+    }
+	else if (keys & KEY_DLEFT) 
+	{
+		util::SubFromOffset(0, ADDR_CJSTAMINA, 0x250000);
+		return true;		
+    }
+
+    return false;
+  });
+  return true;
+}
+
+template <typename T>
+bool RespectEdit2(T *entry) 
+{
+  entry->setClickListener([](u64 keys) 
+  { 
+    if (keys & KEY_DRIGHT)  
+	{
+		util::AddToOffset(0, ADDR_CJRESPECT, 0x250000);
+		return true;
+    }
+	else if (keys & KEY_DLEFT) 
+	{
+		util::SubFromOffset(0, ADDR_CJRESPECT, 0x250000);
+		return true;		
+    }
+
+    return false;
+  });
+  return true;
+}
+
+template <typename T>
+bool SexAppealEdit2(T *entry) 
+{
+  entry->setClickListener([](u64 keys) 
+  { 
+    if (keys & KEY_DRIGHT)  
+	{
+		util::AddToOffset(0, ADDR_CJSEXAPPEAL, 0x250000);
+		return true;
+    }
+	else if (keys & KEY_DLEFT) 
+	{
+		util::SubFromOffset(0, ADDR_CJSEXAPPEAL, 0x250000);
+		return true;		
+    }
+
+    return false;
+  });
+  return true;
+}
+
+template <typename T>
+bool MaxHealthEdit2(T *entry) 
+{
+  entry->setClickListener([](u64 keys) 
+  { 
+    if (keys & KEY_DRIGHT)  
+	{
+		util::AddToOffset(0, ADDR_CJMAXHEALTH, 0x250000);
+		return true;
+    }
+	else if (keys & KEY_DLEFT) 
+	{
+		util::SubFromOffset(0, ADDR_CJMAXHEALTH, 0x250000);
 		return true;		
     }
 
