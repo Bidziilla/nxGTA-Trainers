@@ -4,7 +4,6 @@
 #include "CHEAT/DEFINITIONS/constants.h"
 #include "CHEAT/DEFINITIONS/noval.h"
 #include "CHEAT/DEFINITIONS/addresses.h"
-#include "CHEAT/DEFINITIONS/VEHICLES.h"
 #include "CHEAT/cheatFunctions.h"
 #include "CHEAT/CHEAT/PLAYERCHEAT.h"
 #include "CHEAT/CHEAT/TIMECHEAT.h"
@@ -157,73 +156,34 @@ public:
 		auto list = new tsl::elm::List();
 		if (initialized&&debugService_isRunning()&&metadata.title_id==GAME_TITLE_ID&&bid_match())
 		{
-			auto *SpawnCar00 = new tsl::elm::ListItem("Trash Master", "\uE0A0");
-			SpawnCar002(SpawnCar00);
+			CarIDPicker = new tsl::elm::ListItem("Busta! Straight busta!");
+			CarIDPicker2(CarIDPicker);
 			
-			auto *SpawnCar01 = new tsl::elm::ListItem("Stretch", "\uE0A0");
-			SpawnCar012(SpawnCar01);
-			
-			auto *SpawnCar02 = new tsl::elm::ListItem("FBI Truck", "\uE0A0");
-			SpawnCar022(SpawnCar02);
-			
-			auto *SpawnCar03 = new tsl::elm::ListItem("Combine Harvester", "\uE0A0");
-			SpawnCar032(SpawnCar03);
-			
-			auto *SpawnCar04 = new tsl::elm::ListItem("Andromada", "\uE0A0");
-			SpawnCar042(SpawnCar04);
-			
-			auto *SpawnCar05 = new tsl::elm::ListItem("RC CAM", "\uE0A0");
-			SpawnCar052(SpawnCar05);
-			
-			auto *SpawnCar06 = new tsl::elm::ListItem("Rustler", "\uE0A0");
-			SpawnCar062(SpawnCar06);
-			
-			auto *SpawnCar07 = new tsl::elm::ListItem("Beagle", "\uE0A0");
-			SpawnCar072(SpawnCar07);
-			
-			auto *SpawnCar08 = new tsl::elm::ListItem("Nevada", "\uE0A0");
-			SpawnCar082(SpawnCar08);
-			
-			auto *SpawnCar09 = new tsl::elm::ListItem("Cheetah", "\uE0A0");
-			SpawnCar092(SpawnCar09);
-			
-			auto *SpawnCar0A = new tsl::elm::ListItem("Dune", "\uE0A0");
-			SpawnCar0A2(SpawnCar0A);
-			
-			auto *SpawnCar0B = new tsl::elm::ListItem("NRG-500", "\uE0A0");
-			SpawnCar0B2(SpawnCar0B);
-			
-			auto *SpawnCar0C = new tsl::elm::ListItem("Tow Truck", "\uE0A0");
-			SpawnCar0C2(SpawnCar0C);
-			
-			auto *SpawnCar0D = new tsl::elm::ListItem("Maverick", "\uE0A0");
-			SpawnCar0D2(SpawnCar0D);
-			
-			auto *SpawnCar0E = new tsl::elm::ListItem("Jetmax", "\uE0A0");
-			SpawnCar0E2(SpawnCar0E);
+			auto *SetCarID = new tsl::elm::ListItem("Apply ID", "\uE0A0");
+			SetCarID2(SetCarID);
 			
 			list->addItem(new tsl::elm::CategoryHeader("A, R, A, R, \uE07B, \uE07B, R, L, A, \uE07C"));
-			list->addItem(SpawnCar00);
-			list->addItem(SpawnCar01);
-			list->addItem(SpawnCar02);
-			list->addItem(SpawnCar03);
-			list->addItem(SpawnCar04);
-			list->addItem(SpawnCar05);
-			list->addItem(SpawnCar06);
-			list->addItem(SpawnCar07);
-			list->addItem(SpawnCar08);
-			list->addItem(SpawnCar09);
-			list->addItem(SpawnCar0A);
-			list->addItem(SpawnCar0B);
-			list->addItem(SpawnCar0C);
-			list->addItem(SpawnCar0D);
-			list->addItem(SpawnCar0E);
-			//list->addItem(SpawnCar0F);
-			
+			list->addItem(CarIDPicker);
+			list->addItem(SetCarID);
+			list->addItem(new tsl::elm::CategoryHeader("Help: \n  L/R - Change by 0x10. \n  \uE07B / \uE07C - Change by 0x01. \n\nFor a list of vehicle IDs, visit: \n https://gta.fandom.com/wiki/Vehicle_ID_List \n\nYOU MUST CONVERT FROM \nDECIMAL TO HEX!"));
 		}
 	
 		rootFrame->setContent(list);
         return rootFrame;
+    }
+	
+	virtual void update() override
+    {
+        if (initialized&&debugService_isRunning()&&metadata.title_id==GAME_TITLE_ID&&bid_match())
+        {
+			if(!dmntchtReadCheatProcessMemory(metadata.heap_extents.base + Addr_CarID, &CarID_DEC, sizeof(2)))
+			{
+                char buffer[9];
+				sprintf(buffer, "%8X", CarID_DEC);
+				std::string HexString = std::string(buffer);
+				CarIDPicker->setText("Vehicle ID:                   "+HexString);
+			}
+        }
     }
 };
 
