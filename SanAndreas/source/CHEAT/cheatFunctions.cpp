@@ -57,6 +57,27 @@ u32 util::SubFromOffset(u8 region, u32 Address, u32 Input)
 	return true;
 }
 
+u32 util::ConvertToMOV(u32 Address, u8 Register, u16 Value)
+{
+	uint32_t M0VV = 0x52800000 + Register;
+	uint32_t M0VVPlus = 0x52900000 + Register;
+    dmntchtGetCheatProcessMetadata(&metadata);
+	
+	if (Value <= 0x7FFF) 
+	{
+		uint16_t MathDo = (Value * 2) & 0xFFFF;
+		uint32_t Result = M0VV + (((MathDo << 4) & 0xFFFFF));
+		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + Address, &Result, sizeof(4));
+	}
+	else if (Value >= 0x8000)
+	{
+		uint16_t MathDo = (Value * 2) & 0xFFFF;
+		uint32_t Result = M0VVPlus + (((MathDo << 4) & 0xFFFFF));
+		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + Address, &Result, sizeof(4));
+	}
+	return true;
+}
+
 /*
 
 u32 util::EditTime(u8 Operation, u32 Address, u32 Input, u8 compare, u8 resetValue)
