@@ -22,11 +22,6 @@
 #define ADDR_HOUR 0x6983264
 #define ADDR_MIN 0x6983268
 
-//GFX
-//#define ADDR_DRAWDISTANCE 0x0
-//#define ADDR_BRIGHTNESS 0x0
-//#define ADDR_SATURATION 0x0
-
 //AUDIO
 #define ADDR_AUDIOVOL1 0x375A618            //MAIN  (SFX)
 //#define ADDR_AUDIOVOL2 0x375A5B8          //MAIN  (RADIO)
@@ -40,8 +35,6 @@
 
 //MISC
 #define ADDR_CHEATTRASHID 0xE93CA4          //MAIN (A, R, A, R, Left, Left, R, L, A, Right)
-//#define ADDR_CHEATHYDRAID 0x0
-//#define ADDR_CHEATHUNTERID 0x0
-//#define ADDR_VEHICLEBOOST 0x0
+#define Addr_CarID 0x40
 
 #endif // ADDRESSES_H
