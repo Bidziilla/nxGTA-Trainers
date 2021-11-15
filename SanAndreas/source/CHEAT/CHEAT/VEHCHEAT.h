@@ -3,15 +3,30 @@
 #include <string>
 
 template <typename T>
-bool SpawnCar002(T *entry) 
+bool CarIDPicker2(T *entry) 
 {
   entry->setClickListener([](u64 keys) 
   { 
-    if (keys & KEY_A) 
+    if (keys & KEY_DRIGHT) 
 	{
-		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &TrashMaster, sizeof(4));
+		util::AddToOffset(1, Addr_CarID, 0x1);
 		return true;
 	}
+	else if (keys & KEY_DLEFT) 
+	{
+		util::SubFromOffset(1, Addr_CarID, 0x1);
+		return true;
+	}
+	if (keys & KEY_R) 
+	{
+		util::AddToOffset(1, Addr_CarID, 0x10);
+		return true;
+	}
+	else if (keys & KEY_L) 
+	{
+		util::SubFromOffset(1, Addr_CarID, 0x10);
+		return true;		
+    }
 
     return false;
   });
@@ -19,221 +34,14 @@ bool SpawnCar002(T *entry)
 }
 
 template <typename T>
-bool SpawnCar012(T *entry) 
+bool SetCarID2(T *entry) 
 {
   entry->setClickListener([](u64 keys) 
   { 
     if (keys & KEY_A) 
 	{
-		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &Stretch, sizeof(4));
-		return true;
-	}
-
-    return false;
-  });
-  return true;
-}
-
-template <typename T>
-bool SpawnCar022(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_A) 
-	{
-		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &FBITruck, sizeof(4));
-		return true;
-	}
-
-    return false;
-  });
-  return true;
-}
-
-template <typename T>
-bool SpawnCar032(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_A) 
-	{
-		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &CombineHarvester, sizeof(4));
-		return true;
-	}
-
-    return false;
-  });
-  return true;
-}
-
-template <typename T>
-bool SpawnCar042(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_A) 
-	{
-		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &Andromada, sizeof(4));
-		return true;
-	}
-
-    return false;
-  });
-  return true;
-}
-
-template <typename T>
-bool SpawnCar052(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_A) 
-	{
-		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &RCCAM, sizeof(4));
-		return true;
-	}
-
-    return false;
-  });
-  return true;
-}
-
-template <typename T>
-bool SpawnCar062(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_A) 
-	{
-		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &Rustler, sizeof(4));
-		return true;
-	}
-
-    return false;
-  });
-  return true;
-}
-
-template <typename T>
-bool SpawnCar072(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_A) 
-	{
-		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &Beagle, sizeof(4));
-		return true;
-	}
-
-    return false;
-  });
-  return true;
-}
-
-template <typename T>
-bool SpawnCar082(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_A) 
-	{
-		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &Nevada, sizeof(4));
-		return true;
-	}
-
-    return false;
-  });
-  return true;
-}
-
-template <typename T>
-bool SpawnCar092(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_A) 
-	{
-		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &Cheetah, sizeof(4));
-		return true;
-	}
-
-    return false;
-  });
-  return true;
-}
-
-template <typename T>
-bool SpawnCar0A2(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_A) 
-	{
-		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &Dune, sizeof(4));
-		return true;
-	}
-
-    return false;
-  });
-  return true;
-}
-
-template <typename T>
-bool SpawnCar0B2(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_A) 
-	{
-		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &NRG_500, sizeof(4));
-		return true;
-	}
-
-    return false;
-  });
-  return true;
-}
-
-template <typename T>
-bool SpawnCar0C2(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_A) 
-	{
-		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &TowTruck, sizeof(4));
-		return true;
-	}
-
-    return false;
-  });
-  return true;
-}
-
-template <typename T>
-bool SpawnCar0D2(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_A) 
-	{
-		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &Maverick, sizeof(4));
-		return true;
-	}
-
-    return false;
-  });
-  return true;
-}
-
-template <typename T>
-bool SpawnCar0E2(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_A) 
-	{
-		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CHEATTRASHID, &Jetmax, sizeof(4));
+		dmntchtReadCheatProcessMemory(metadata.heap_extents.base + Addr_CarID, &ActualCarID, sizeof(2));
+		util::ConvertToMOV(ADDR_CHEATTRASHID, 0, ActualCarID);
 		return true;
 	}
 
