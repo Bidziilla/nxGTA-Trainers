@@ -27,7 +27,7 @@ into the newly created folder.
 * Run "build.bat", and let it finish. Tadaaa, you're done!
 
 ## Credits:
-Rydoginator - Recording footage, code improvements.
+Rydoginator - Recording HD footage (Capture card), code improvements.
 
 ## Note:
 These trainers are not licensed, endorsed, or approved by Nintendo, Rockstar Games, Rockstar North, TakeTwo Interactive, or Grove Street Games. 
