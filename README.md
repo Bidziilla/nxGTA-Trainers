@@ -26,6 +26,9 @@ in the other, please let me know!!*
 into the newly created folder.
 * Run "build.bat", and let it finish. Tadaaa, you're done!
 
+## Credits:
+Rydoginator - Recording footage, code improvements.
+
 ## Note:
 These trainers are not licensed, endorsed, or approved by Nintendo, Rockstar Games, Rockstar North, TakeTwo Interactive, or Grove Street Games. 
 This trainers purpose is to provide users with cheats for the games included in the Grand Theft Auto: The Trilogy - The Definitive Edition bundle, all cheats have been
