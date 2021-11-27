@@ -17,7 +17,7 @@ static bool initialized=false;
 //CHECK
 bool bid_match() {
     const unsigned char build_id_size=8;
-    const unsigned char expected_build_id[build_id_size]={0x70, 0x61, 0x70, 0x6e, 0xf4, 0xd9, 0x7b, 0x84};
+    const unsigned char expected_build_id[build_id_size]={0x7D, 0x54, 0xA9, 0xE6, 0xB7, 0x11, 0x70, 0xDC};
     for(unsigned char i=0; i<build_id_size; i++)
         if(metadata.main_nso_build_id[i]!=expected_build_id[i])
             return false;
@@ -42,24 +42,12 @@ public:
 		auto list = new tsl::elm::List();
 		if (initialized&&debugService_isRunning()&&metadata.title_id==GAME_TITLE_ID&&bid_match())
 		{
-			auto *Add250k = new tsl::elm::ListItem("Add $25,000", "\uE0A0");
+			auto *Add250k = new tsl::elm::ListItem("Add $250,000", "\uE0A0");
 			Add250k2(Add250k);
 			
 			auto *RemoveCash = new tsl::elm::ListItem("Remove All Money", "\uE0A0");
 			RemoveCash2(RemoveCash);
-			
-			/*auto *MaxHealth = new tsl::elm::ListItem("Max Health", "\uE0A0");
-			MaxHealth2(MaxHealth);
-			
-			auto *MaxArmor = new tsl::elm::ListItem("Max Armor", "\uE0A0");
-			MaxArmor2(MaxArmor);
-			
-			auto *Suicide = new tsl::elm::ListItem("Kill CJ", "\uE0A0");
-			Suicide2(Suicide);
-			
-			auto *MaxAmmo = new tsl::elm::ListItem("Max Ammunition", "\uE0A0");
-			MaxAmmo2(MaxAmmo);*/
-			
+
 			auto *MuscleEdit = new tsl::elm::ListItem("Muscle", "\uE07B / \uE07C");
 			MuscleEdit2(MuscleEdit);
 			
@@ -72,26 +60,17 @@ public:
 			auto *RespectEdit = new tsl::elm::ListItem("Respect", "\uE07B / \uE07C");
 			RespectEdit2(RespectEdit);
 			
-			auto *SexAppealEdit = new tsl::elm::ListItem("Sex Appeal", "\uE07B / \uE07C");
-			SexAppealEdit2(SexAppealEdit);
-			
 			auto *MaxHealthEdit = new tsl::elm::ListItem("Max Health", "\uE07B / \uE07C");
 			MaxHealthEdit2(MaxHealthEdit);
 			
 			list->addItem(new tsl::elm::CategoryHeader("Money Cheats"));
 			list->addItem(Add250k);
 			list->addItem(RemoveCash);
-			//list->addItem(new tsl::elm::CategoryHeader("Health/Armor/Ammo"));
-			//list->addItem(MaxHealth);
-			//list->addItem(MaxArmor);
-			//list->addItem(Suicide);
-			//list->addItem(MaxAmmo);
 			list->addItem(new tsl::elm::CategoryHeader("Stats"));
 			list->addItem(MuscleEdit);
 			list->addItem(FatEdit);
 			list->addItem(StaminaEdit);
 			list->addItem(RespectEdit);
-			list->addItem(SexAppealEdit);
 			list->addItem(MaxHealthEdit);
 			
 		}
@@ -192,15 +171,55 @@ public:
     MISC_CHEAT_GUI() {}
 
     virtual tsl::elm::Element* createUI() override {
-        auto *rootFrame = new tsl::elm::OverlayFrame("Misc Cheats", "Some extra stuff...");
+        auto *rootFrame = new tsl::elm::OverlayFrame("Activate Cheats", "Rockstar approved cheats!");
 		auto list = new tsl::elm::List();
 		if (initialized&&debugService_isRunning()&&metadata.title_id==GAME_TITLE_ID&&bid_match())
 		{
-			auto *FixAudioo = new tsl::elm::ListItem("Increase Audio Volume", "\uE07B / \uE07C");
-			FixAudioo2(FixAudioo);
+			auto *Handling = new tsl::elm::ListItem("Insane Handling", "\uE07B / \uE07C");
+			Handling2(Handling);
+			
+			auto *FlyingBoat = new tsl::elm::ListItem("Boats Fly", "\uE07B / \uE07C");
+			FlyingBoat2(FlyingBoat);
+			
+			auto *CarsOnWater = new tsl::elm::ListItem("Cars on Water", "\uE07B / \uE07C");
+			CarsOnWater2(CarsOnWater);
+			
+			auto *SportsCars = new tsl::elm::ListItem("Sports Traffic", "\uE07B / \uE07C");
+			SportsCars2(SportsCars);
+			
+			auto *BunnyHop = new tsl::elm::ListItem("Big Bunny Hops", "\uE07B / \uE07C");
+			BunnyHop2(BunnyHop);
+			
+			auto *FlyingCars = new tsl::elm::ListItem("Cars Fly", "\uE07B / \uE07C");
+			FlyingCars2(FlyingCars);
+			
+			auto *DeathCar = new tsl::elm::ListItem("Vehicle of Death", "\uE07B / \uE07C");
+			DeathCar2(DeathCar);
+			
+			auto *SuperJump = new tsl::elm::ListItem("Super Jump", "\uE07B / \uE07C");
+			SuperJump2(SuperJump);
+			
+			auto *InfBreath = new tsl::elm::ListItem("Never Drown", "\uE07B / \uE07C");
+			InfBreath2(InfBreath);
+			
+			auto *WantedLock = new tsl::elm::ListItem("Never Wanted", "\uE07B / \uE07C");
+			WantedLock2(WantedLock);
+			
+			auto *SuperPunch = new tsl::elm::ListItem("Super Punch", "\uE07B / \uE07C");
+			SuperPunch2(SuperPunch);
 			
 			list->addItem(new tsl::elm::CategoryHeader("\uE07B - OFF  /  \uE07C - ON"));
-			list->addItem(FixAudioo);
+			list->addItem(Handling);
+			list->addItem(FlyingBoat);
+			list->addItem(CarsOnWater);
+			list->addItem(SportsCars);
+			list->addItem(BunnyHop);
+			list->addItem(FlyingCars);
+			list->addItem(DeathCar);
+			list->addItem(SuperJump);
+			list->addItem(InfBreath);
+			list->addItem(WantedLock);
+			list->addItem(SuperPunch);
 		}
 	
 		rootFrame->setContent(list);
@@ -230,7 +249,7 @@ public:
     GuiTest(u8 arg1, u8 arg2, bool arg3) {}
 
     virtual tsl::elm::Element* createUI() override {
-        auto rootFrame = new tsl::elm::OverlayFrame("GTA: SA TRAINER", "Made by Bidziilla, Ver: 1.0");
+        auto rootFrame = new tsl::elm::OverlayFrame("GTA: SA TRAINER", "Made by Bidziilla, Ver: 2.1");
         auto list = new tsl::elm::List();
         if (initialized&&debugService_isRunning()&&metadata.title_id==GAME_TITLE_ID&&bid_match())
         {
@@ -274,7 +293,7 @@ public:
             return false;
 			});
 			
-			auto *MiscCheats = new tsl::elm::ListItem("Misc Cheats", "\u2600");
+			auto *MiscCheats = new tsl::elm::ListItem("Activate Cheats", "\u2600");
 			MiscCheats->setClickListener([](u64 keys) { 
             if (keys & KEY_A) {
                 tsl::changeTo<MISC_CHEAT_GUI>();
