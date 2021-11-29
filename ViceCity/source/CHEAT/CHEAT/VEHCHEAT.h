@@ -42,11 +42,7 @@ bool SetCarID2(T *entry)
 	{
 		dmntchtReadCheatProcessMemory(metadata.heap_extents.base + Addr_CarID, &ActualCarID, sizeof(2));
 		
-		for(int i = 0; i <= 8; i++)
-		{
-			util::CheckIDRange(ActualCarID, 0x81, 0xED, Addr_CarID, 0x82);
-			util::ConvertToMOV(ADDR_CHEATRHINOID, 0, ActualCarID);
-		}
+		util::ConvertToMOV(ADDR_CHEATRHINOID, 0, ActualCarID);
         
 		return true;
 	}
