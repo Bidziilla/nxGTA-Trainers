@@ -12,11 +12,12 @@
 
 #define GAME_TITLE_ID 0x0100182014022000
 static bool initialized=false;
+FanController g_ICon;
 
 //CHECK
 bool bid_match() {
     const unsigned char build_id_size=8;
-    const unsigned char expected_build_id[build_id_size]={0x3E, 0xC2, 0x30, 0x85, 0x04, 0x91, 0x82, 0x6D};
+    const unsigned char expected_build_id[build_id_size]={0xA6, 0x0E, 0x8C, 0xA8, 0x6C, 0x6F, 0xD7, 0x04}; //AnthonyUDT got this for me, thanks!!
     for(unsigned char i=0; i<build_id_size; i++)
         if(metadata.main_nso_build_id[i]!=expected_build_id[i])
             return false;
@@ -122,44 +123,6 @@ public:
     }
 };
 
-class MISC_CHEAT_GUI : public tsl::Gui {
-public:
-    MISC_CHEAT_GUI() {}
-
-    virtual tsl::elm::Element* createUI() override {
-        auto *rootFrame = new tsl::elm::OverlayFrame("Misc Cheats", "Some extra stuff...");
-		auto list = new tsl::elm::List();
-		if (initialized&&debugService_isRunning()&&metadata.title_id==GAME_TITLE_ID&&bid_match())
-		{
-			auto *HudMode = new tsl::elm::ListItem("Disable HUD", "\uE07B / \uE07C");
-			HudMode2(HudMode);
-			
-			list->addItem(new tsl::elm::CategoryHeader("\uE07B - OFF  /  \uE07C - ON"));
-			list->addItem(HudMode);
-		}
-	
-		rootFrame->setContent(list);
-        return rootFrame;
-    }
-};
-
-class LEGALGUI : public tsl::Gui {
-public:
-    LEGALGUI() {}
-
-    virtual tsl::elm::Element* createUI() override {
-        auto *rootFrame = new tsl::elm::OverlayFrame("Legal Information", "You should read this.");
-		auto list = new tsl::elm::List();
-		if (initialized&&debugService_isRunning()&&metadata.title_id==GAME_TITLE_ID&&bid_match())
-		{
-			list->addItem(new tsl::elm::CategoryHeader("THIS SOFTWARE MUST NOT BE SOLD NEITHER \nALONE NOR AS PART OF A BUNDLE. \n\nIF YOU PAID FOR THIS SOFTWARE, YOU HAVE \nBEEN SCAMMED AND SHOULD DEMAND YOUR \nMONEY BACK IMMEDIATELY. \n\nThis software is not affiliated with, endorsed or \napproved by Nintendo, Rockstar Games or \nTakeTwo Interactive. \n\nThis software provides users with \nspecial cheats for one or more games in \nthe Grand Theft Auto Trilogy. \nThese cheats were made through \nthe use of cleanroom reverse engineering \ntherefore, no copyright law has been broken. \n\nIn other words, this is a passion project \nplease don't sue me."));
-		}
-	
-		rootFrame->setContent(list);
-        return rootFrame;
-    }
-};
-
 class GuiTest : public tsl::Gui {
 public:
     GuiTest(u8 arg1, u8 arg2, bool arg3) {}
@@ -199,34 +162,11 @@ public:
             return false;
 			});
 			
-			auto *MiscCheats = new tsl::elm::ListItem("Misc Cheats", "\u2600");
-			MiscCheats->setClickListener([](u64 keys) { 
-            if (keys & KEY_A) {
-                tsl::changeTo<MISC_CHEAT_GUI>();
-                return true;
-            }
-
-            return false;
-			});
-			
-			auto *LEGALINFORMATION = new tsl::elm::ListItem("Legal Information", "\u2600");
-			LEGALINFORMATION->setClickListener([](u64 keys) { 
-            if (keys & KEY_A) {
-                tsl::changeTo<LEGALGUI>();
-                return true;
-            }
-
-            return false;
-			});
-			
 			list->addItem(new tsl::elm::CategoryHeader("Cheats"));
 			list->addItem(PlayerCheats);
 			list->addItem(TimeCheats);
 			//list->addItem(EnableCheats);
 			list->addItem(VehicleCheats);
-			list->addItem(MiscCheats);
-			list->addItem(new tsl::elm::CategoryHeader("Legal"));
-			list->addItem(LEGALINFORMATION);
 		}
 		else
         {
@@ -253,6 +193,9 @@ public:
             dmntchtInitialize();
             dmntchtForceOpenCheatProcess();
             dmntchtGetCheatProcessMetadata(&metadata);
+			fanInitialize();
+			fanGetServiceSession();
+			//fanOpenController(&g_ICon, 1);
 
             initialized=true;
         }
@@ -260,6 +203,9 @@ public:
     virtual void exitServices() override
     {
         dmntchtExit();
+		fanControllerClose(&g_ICon);
+		fanExit();
+		
         initialized=false;
     }
 
