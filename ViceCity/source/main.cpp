@@ -16,7 +16,7 @@ static bool initialized=false;
 //CHECK
 bool bid_match() {
     const unsigned char build_id_size=8;
-    const unsigned char expected_build_id[build_id_size]={0x3E, 0xC2, 0x30, 0x85, 0x04, 0x91, 0x82, 0x6D};
+    const unsigned char expected_build_id[build_id_size]={0xA6, 0x0E, 0x8C, 0xA8, 0x6C, 0x6F, 0xD7, 0x04};
     for(unsigned char i=0; i<build_id_size; i++)
         if(metadata.main_nso_build_id[i]!=expected_build_id[i])
             return false;
@@ -171,7 +171,7 @@ public:
         {
 			auto *PlayerCheats = new tsl::elm::ListItem("Player Cheats", "\u2600");
 			PlayerCheats->setClickListener([](u64 keys) { 
-            if (keys & KEY_A) {
+            if (keys & HidNpadButton_A) {
                 tsl::changeTo<PLAYER_CHEAT_GUI>();
                 return true;
             }
@@ -181,7 +181,7 @@ public:
 			
 			auto *TimeCheats = new tsl::elm::ListItem("Time Cheats", "\u2600");
 			TimeCheats->setClickListener([](u64 keys) { 
-            if (keys & KEY_A) {
+            if (keys & HidNpadButton_A) {
                 tsl::changeTo<TIME_CHEAT_GUI>();
                 return true;
             }
@@ -191,7 +191,7 @@ public:
 			
 			auto *VehicleCheats = new tsl::elm::ListItem("Vehicle Cheats", "\u2600");
 			VehicleCheats->setClickListener([](u64 keys) { 
-            if (keys & KEY_A) {
+            if (keys & HidNpadButton_A) {
                 tsl::changeTo<VEH_CHEAT_GUI>();
                 return true;
             }
@@ -201,7 +201,7 @@ public:
 			
 			auto *MiscCheats = new tsl::elm::ListItem("Misc Cheats", "\u2600");
 			MiscCheats->setClickListener([](u64 keys) { 
-            if (keys & KEY_A) {
+            if (keys & HidNpadButton_A) {
                 tsl::changeTo<MISC_CHEAT_GUI>();
                 return true;
             }
@@ -211,7 +211,7 @@ public:
 			
 			auto *LEGALINFORMATION = new tsl::elm::ListItem("Legal Information", "\u2600");
 			LEGALINFORMATION->setClickListener([](u64 keys) { 
-            if (keys & KEY_A) {
+            if (keys & HidNpadButton_A) {
                 tsl::changeTo<LEGALGUI>();
                 return true;
             }
@@ -238,9 +238,10 @@ public:
     }
 	
 
-    virtual bool handleInput(u64 keysDown, u64 keysHeld, touchPosition touchInput, JoystickPosition leftJoyStick, JoystickPosition rightJoyStick) override {
-        return false;
-    }
+            virtual bool handleInput(u64 keysDown, u64 keysHeld, const HidTouchState &touchPos, HidAnalogStickState joyStickPosLeft, HidAnalogStickState joyStickPosRight) 
+	    {
+                return false;
+            }
 };
 
 class OverlayTest : public tsl::Overlay {

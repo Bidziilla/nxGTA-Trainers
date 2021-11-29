@@ -6,13 +6,14 @@
 #include "CHEAT/DEFINITIONS/addresses.h"
 #include "CHEAT/cheatFunctions.h"
 
-#define GAME_TITLE_ID 0x0000000000000000
+#define GAME_TITLE_ID 0x0100C3C012718000
+
 static bool initialized=false;
 
 //CHECK
 bool bid_match() {
     const unsigned char build_id_size=8;
-    const unsigned char expected_build_id[build_id_size]={0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+	const unsigned char expected_build_id[build_id_size]={0xCB, 0x06, 0x43, 0x27, 0x0D, 0xA9, 0x6E, 0xCD};
     for(unsigned char i=0; i<build_id_size; i++)
         if(metadata.main_nso_build_id[i]!=expected_build_id[i])
             return false;
@@ -56,7 +57,7 @@ public:
         {
 			auto *LEGALINFORMATION = new tsl::elm::ListItem("Legal Information", "\u2600");
 			LEGALINFORMATION->setClickListener([](u64 keys) { 
-            if (keys & KEY_A) {
+            if (keys & HidNpadButton_A) {
                 tsl::changeTo<LEGALGUI>();
                 return true;
             }
@@ -73,7 +74,8 @@ public:
         return rootFrame;
     }
 
-    virtual bool handleInput(u64 keysDown, u64 keysHeld, touchPosition touchInput, JoystickPosition leftJoyStick, JoystickPosition rightJoyStick) override {
+    virtual bool handleInput(u64 keysDown, u64 keysHeld, const HidTouchState &touchPos, HidAnalogStickState joyStickPosLeft, HidAnalogStickState joyStickPosRight) override 
+    {
         return false;
     }
 };
