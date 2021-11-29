@@ -8,7 +8,7 @@ TOPDIR ?= $(CURDIR)
 include $(DEVKITPRO)/libnx/switch_rules
 
 APP_TITLE	:=	San Andreas Trainer
-APP_VERSION := 	1.0
+APP_VERSION := 	2.1
 
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
