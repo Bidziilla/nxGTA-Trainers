@@ -12,6 +12,12 @@ bool Add250k2(T *entry)
 		util::AddToOffset(0, ADDR_MONEY, 0x3D090);
 		return true;
     }
+	else if (keys & KEY_X) 
+	{
+		util::Write32(0, ADDR_MONEY, 0x3B9AC9FF);
+		util::Write32(0, ADDR_MONEY + 4, 0x3B9AC9FF);
+		return true;
+    }
 
     return false;
   });
@@ -25,8 +31,8 @@ bool RemoveCash2(T *entry)
   { 
     if (keys & KEY_A) 
 	{
-		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_MONEY, &Zero, sizeof(4));
-		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_MONEY + 0x04, &Zero, sizeof(4));
+		util::Write32(0, ADDR_MONEY, Zero);
+		util::Write32(0, ADDR_MONEY + 4, Zero);
 		return true;
     }
 
