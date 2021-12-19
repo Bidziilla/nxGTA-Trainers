@@ -1,23 +1,22 @@
 #include "cheatFunctions.h"
 
 DmntCheatProcessMetadata metadata;
+int Read16;
 int Read32;
 int MathOutput;
 
-//                   M E M O R Y      M A N I P U L A T I O N      //////////////////////////////////////////
+uint64_t FollowPointer(uint64_t initAddr, const uint64_t* offsets, const uint32_t offsetsSize) {
+    uint64_t address = 0;
 
-u32 util::CopyHeapMemory(u32 read, u32 write)
-{
-    int ValueToCopy;
-
+    DmntCheatProcessMetadata metadata;
     dmntchtGetCheatProcessMetadata(&metadata);
-	
-	dmntchtReadCheatProcessMemory(metadata.heap_extents.base + read, &ValueToCopy, sizeof(4));
-	dmntchtWriteCheatProcessMemory(metadata.heap_extents.base + write, &ValueToCopy, sizeof(4));
-	return true;
-}
+    dmntchtReadCheatProcessMemory(metadata.main_nso_extents.base + initAddr, &address, 8);
 
-//                A R I T H M A T I C      O P E R A T I O N S    //////////////////////////////////////////
+    for (uint32_t i = 0; i < offsetsSize; i++) {
+        dmntchtReadCheatProcessMemory(address + offsets[i], &address, 8);
+    }
+    return address;
+}
 
 u32 util::AddToOffset(u8 region, u32 Address, u32 Input)
 {
@@ -78,39 +77,47 @@ u32 util::ConvertToMOV(u32 Address, u8 Register, u16 Value)
 	return true;
 }
 
-/*
-
-u32 util::EditTime(u8 Operation, u32 Address, u32 Input, u8 compare, u8 resetValue)
+u32 util::Write8(u8 region, u32 Address, u8 Value)
 {
-    dmntchtGetCheatProcessMetadata(&metadata);
+	dmntchtGetCheatProcessMetadata(&metadata);
 	
-	dmntchtReadCheatProcessMemory(metadata.main_nso_extents.base + Address, &Read32, sizeof(1));
-	
-	if (Operation == 0x00)
+	if (region == 0x00)
 	{
-		if (Read32 >= compare)
-		{
-			dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + Address, &resetValue, sizeof(1));
-		}
-		else
-		{
-			dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + Address, &Read32, sizeof(1));
-			MathOutput = Read32 + Input;
-			dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + Address, &MathOutput, sizeof(1));
-		}
+		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + Address, &Value, sizeof(1));
 	}
-	else if (Operation == 0x01)
+	else if (region == 0x01)
 	{
-		if (Read32 <= compare)
-		{
-			dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + Address, &resetValue, sizeof(1));
-		}
-		else
-		{
-			dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + Address, &Read32, sizeof(1));
-			MathOutput = Read32 - Input;
-			dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + Address, &MathOutput, sizeof(1));
-		}
+		dmntchtWriteCheatProcessMemory(metadata.heap_extents.base + Address, &Value, sizeof(1));
 	}
 	return true;
-}*/
+}
+
+u32 util::Write16(u8 region, u32 Address, u16 Value)
+{
+	dmntchtGetCheatProcessMetadata(&metadata);
+	
+	if (region == 0x00)
+	{
+		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + Address, &Value, sizeof(2));
+	}
+	else if (region == 0x01)
+	{
+		dmntchtWriteCheatProcessMemory(metadata.heap_extents.base + Address, &Value, sizeof(2));
+	}
+	return true;
+}
+
+u32 util::Write32(u8 region, u32 Address, u32 Value)
+{
+	dmntchtGetCheatProcessMetadata(&metadata);
+	
+	if (region == 0x00)
+	{
+		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + Address, &Value, sizeof(4));
+	}
+	else if (region == 0x01)
+	{
+		dmntchtWriteCheatProcessMemory(metadata.heap_extents.base + Address, &Value, sizeof(4));
+	}
+	return true;
+}
