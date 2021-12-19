@@ -9,12 +9,12 @@ bool RunFast2(T *entry)
   { 
     if (keys & KEY_DRIGHT) 
 	{
-		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CJRUNSPEED, &CJRunFast, sizeof(4));
+		util::Write32(0, ADDR_CJRUNSPEED, 0x1E2E1002);
 		return true;
 	}
 	else if (keys & KEY_DLEFT) 
 	{
-		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CJRUNSPEED, &DefaultFloat2, sizeof(4));
+		util::Write32(0, ADDR_CJRUNSPEED, 0x1E241002);
 		return true;		
     }
 
