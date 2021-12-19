@@ -30,12 +30,12 @@ bool TimeEditMin2(T *entry)
   { 
     if (keys & KEY_DRIGHT) 
 	{
-		util::AddToOffset(0, ADDR_TIME + 0x04, 0x1);
+		util::AddToOffset(0, ADDR_TIME + 4, 0x1);
 		return true;
 	}
 	else if (keys & KEY_DLEFT) 
 	{
-		util::SubFromOffset(0, ADDR_TIME + 0x04, 0x1);
+		util::SubFromOffset(0, ADDR_TIME + 4, 0x1);
 		return true;		
     }
 
