@@ -9,14 +9,12 @@ bool TimeEditHour2(T *entry)
   { 
     if (keys & KEY_DRIGHT) 
 	{
-		//util::EditTime(0, ADDR_HOUR, 1, 0x17, 1);
-		util::AddToOffset(0, ADDR_HOUR, 0x1);
+		util::AddToOffset(0, ADDR_TIME, 0x1);
 		return true;
 	}
 	else if (keys & KEY_DLEFT) 
 	{
-		//util::EditTime(1, ADDR_HOUR, 1, 1, 2);
-		util::SubFromOffset(0, ADDR_HOUR, 0x1);
+		util::SubFromOffset(0, ADDR_TIME, 0x1);
 		return true;		
     }
 
@@ -32,12 +30,12 @@ bool TimeEditMin2(T *entry)
   { 
     if (keys & KEY_DRIGHT) 
 	{
-		util::AddToOffset(0, ADDR_MIN, 0x1);
+		util::AddToOffset(0, ADDR_TIME + 0x04, 0x1);
 		return true;
 	}
 	else if (keys & KEY_DLEFT) 
 	{
-		util::SubFromOffset(0, ADDR_MIN, 0x1);
+		util::SubFromOffset(0, ADDR_TIME + 0x04, 0x1);
 		return true;		
     }
 
