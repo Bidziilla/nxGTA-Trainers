@@ -9,9 +9,14 @@ bool Add250k2(T *entry)
   { 
     if (keys & KEY_A) 
 	{
-		util::AddToOffset(0, ADDR_CJMONEY, 0x61A8);
+		util::AddToOffset(0, ADDR_CJMONEY, 0x3D090);
 		return true;
     }
+	else if (keys & KEY_X)
+	{
+		util::AddToOffset(0, ADDR_CJMONEY, 0x3B9AC9FF);
+		util::AddToOffset(0, ADDR_CJMONEY + 0x04, 0x3B9AC9FF);
+	}
 
     return false;
   });
@@ -25,200 +30,9 @@ bool RemoveCash2(T *entry)
   { 
     if (keys & KEY_A) 
 	{
-		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CJMONEY, &Zero, sizeof(4));
-		dmntchtWriteCheatProcessMemory(metadata.main_nso_extents.base + ADDR_CJMONEYDISPLAY, &Zero, sizeof(4));
+		util::Write32(0, ADDR_CJMONEY, 0);
+		util::Write32(0, ADDR_CJMONEY + 4, 0);
 		return true;
-    }
-
-    return false;
-  });
-  return true;
-}
-
-/*template <typename T>
-bool MaxHealth2(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_A) 
-	{
-		//dmntchtWriteCheatProcessMemory(metadata.heap_extents.base + ADDR_CJHEALTH, &PlaceHolder, sizeof(4));
-		return true;
-    }
-
-    return false;
-  });
-  return true;
-}
-
-template <typename T>
-bool MaxArmor2(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_A) 
-	{
-		//dmntchtWriteCheatProcessMemory(metadata.heap_extents.base + ADDR_CJARMOR, &PlaceHolder, sizeof(4));
-		return true;
-    }
-
-    return false;
-  });
-  return true;
-}
-
-template <typename T>
-bool Suicide2(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_A) 
-	{
-		dmntchtWriteCheatProcessMemory(metadata.heap_extents.base + ADDR_CJHEALTH, &PlaceHolder, sizeof(4));
-		dmntchtWriteCheatProcessMemory(metadata.heap_extents.base + ADDR_CJARMOR, &PlaceHolder, sizeof(4));
-		return true;
-    }
-
-    return false;
-  });
-  return true;
-}
-
-template <typename T>
-bool MaxAmmo2(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_A) 
-	{
-		//dmntchtWriteCheatProcessMemory(metadata.heap_extents.base + ADDR_PLACEHOLDER, &PlaceHolder, sizeof(4));
-		return true;
-    }
-
-    return false;
-  });
-  return true;
-}*/
-
-template <typename T>
-bool MuscleEdit2(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_DRIGHT)  
-	{
-		util::AddToOffset(0, ADDR_CJMUSCLE, 0x250000);
-		return true;
-    }
-	else if (keys & KEY_DLEFT) 
-	{
-		util::SubFromOffset(0, ADDR_CJMUSCLE, 0x250000);
-		return true;		
-    }
-
-    return false;
-  });
-  return true;
-}
-
-template <typename T>
-bool FatEdit2(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_DRIGHT)  
-	{
-		util::AddToOffset(0, ADDR_CJFAT, 0x250000);
-		return true;
-    }
-	else if (keys & KEY_DLEFT) 
-	{
-		util::SubFromOffset(0, ADDR_CJFAT, 0x250000);
-		return true;		
-    }
-
-    return false;
-  });
-  return true;
-}
-
-template <typename T>
-bool StaminaEdit2(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_DRIGHT)  
-	{
-		util::AddToOffset(0, ADDR_CJSTAMINA, 0x250000);
-		return true;
-    }
-	else if (keys & KEY_DLEFT) 
-	{
-		util::SubFromOffset(0, ADDR_CJSTAMINA, 0x250000);
-		return true;		
-    }
-
-    return false;
-  });
-  return true;
-}
-
-template <typename T>
-bool RespectEdit2(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_DRIGHT)  
-	{
-		util::AddToOffset(0, ADDR_CJRESPECT, 0x250000);
-		return true;
-    }
-	else if (keys & KEY_DLEFT) 
-	{
-		util::SubFromOffset(0, ADDR_CJRESPECT, 0x250000);
-		return true;		
-    }
-
-    return false;
-  });
-  return true;
-}
-
-template <typename T>
-bool SexAppealEdit2(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_DRIGHT)  
-	{
-		util::AddToOffset(0, ADDR_CJSEXAPPEAL, 0x250000);
-		return true;
-    }
-	else if (keys & KEY_DLEFT) 
-	{
-		util::SubFromOffset(0, ADDR_CJSEXAPPEAL, 0x250000);
-		return true;		
-    }
-
-    return false;
-  });
-  return true;
-}
-
-template <typename T>
-bool MaxHealthEdit2(T *entry) 
-{
-  entry->setClickListener([](u64 keys) 
-  { 
-    if (keys & KEY_DRIGHT)  
-	{
-		util::AddToOffset(0, ADDR_CJMAXHEALTH, 0x250000);
-		return true;
-    }
-	else if (keys & KEY_DLEFT) 
-	{
-		util::SubFromOffset(0, ADDR_CJMAXHEALTH, 0x250000);
-		return true;		
     }
 
     return false;
