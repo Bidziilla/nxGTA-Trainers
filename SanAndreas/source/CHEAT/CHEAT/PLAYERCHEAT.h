@@ -15,7 +15,7 @@ bool Add250k2(T *entry)
 	else if (keys & KEY_X)
 	{
 		util::AddToOffset(0, ADDR_CJMONEY, 0x3B9AC9FF);
-		util::AddToOffset(0, ADDR_CJMONEY + 0x04, 0x3B9AC9FF);
+		util::AddToOffset(0, ADDR_CJMONEY + 4, 0x3B9AC9FF);
 	}
 
     return false;
